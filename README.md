@@ -59,16 +59,27 @@ qlab stop docker-lab
 
 ## Exercises
 
-1. **Run your first container**: Execute `docker run hello-world` and understand the output
-2. **Run Nginx**: Start an Nginx container with `docker run -d -p 8080:80 nginx` and test with `curl localhost:8080`
-3. **Build a custom image**: Create a `Dockerfile`, build with `docker build -t myapp .`, and run it
-4. **Use Docker Compose**: Navigate to `~/compose-demo` and run `docker-compose up -d` to start a multi-container app
-5. **Explore volumes**: Create a named volume with `docker volume create mydata` and mount it in a container
-6. **Docker networks**: Create a custom network with `docker network create mynet` and connect containers to it
+> **New to Docker?** See the [Step-by-Step Guide](guide.md) for complete walkthroughs with full examples.
 
-## Sample Files
+| # | Exercise | What you'll do |
+|---|----------|----------------|
+| 1 | **Docker Anatomy** | Explore Docker installation, daemon, and basic commands |
+| 2 | **Images and Containers** | Pull images, run containers, manage lifecycle |
+| 3 | **Container Interaction** | Execute commands, inspect logs, attach to containers |
+| 4 | **Volumes and Data** | Create volumes, bind mounts, persist data |
+| 5 | **Docker Compose** | Deploy multi-container apps with `~/compose-demo` |
+| 6 | **Building Images** | Write Dockerfiles and build custom images |
 
-The lab includes a sample Docker Compose project in `~/compose-demo/` with an Nginx web server and MySQL database.
+## Automated Tests
+
+An automated test suite validates the exercises against a running VM:
+
+```bash
+# Start the lab first
+qlab run docker-lab
+# Wait ~60s for cloud-init, then run all tests
+qlab test docker-lab
+```
 
 ## Resetting
 
