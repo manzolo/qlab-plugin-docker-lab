@@ -348,9 +348,9 @@ rm -rf /tmp/hostdir
 ## Exercise 05 — Docker Compose
 
 **VM:** docker-lab
-**Goal:** Orchestrate multi-container applications with Docker Compose.
+**Goal:** Manage containerized services with Docker Compose.
 
-Real applications rarely run in a single container. Docker Compose lets you define multi-container applications in a YAML file and manage them as a unit. This is how most development environments and simple production deployments work.
+Docker Compose lets you define and manage containers using a YAML file instead of long `docker run` commands. It is the standard way to describe reproducible container setups for development and testing. Even a single-service application benefits from Compose because the configuration is declarative, version-controlled, and easy to share.
 
 ### 5.1 Explore the pre-built demo
 
@@ -364,7 +364,7 @@ ls ~/compose-demo/
 cat ~/compose-demo/docker-compose.yml
 ```
 
-This defines two services: a web server (nginx) and a database (mysql), with networking and volumes.
+This defines a web service running nginx:alpine with a bind-mounted HTML directory, making it easy to serve custom content without rebuilding an image.
 
 ### 5.3 Start the stack
 
@@ -379,7 +379,7 @@ docker-compose up -d
 docker-compose ps
 ```
 
-Both services should show as "Up".
+The web service should show as "Up".
 
 ### 5.5 View logs
 
@@ -400,7 +400,7 @@ docker-compose down
 cd ~
 ```
 
-**Verification:** `docker-compose up -d` starts all services, `docker-compose ps` shows them running.
+**Verification:** `docker-compose up -d` starts the service, `docker-compose ps` shows it running.
 
 ---
 
