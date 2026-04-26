@@ -92,6 +92,10 @@ packages:
   - docker.io
   - docker-compose
   - curl
+  - zsh
+  - vim
+  - nano
+  - fonts-powerline
 write_files:
   - path: /etc/profile.d/cloud-init-status.sh
     permissions: '0755'
@@ -164,6 +168,13 @@ write_files:
     content: |
       <h1>Hello from Docker Lab!</h1>
       <p>This page is served by Nginx inside a Docker container.</p>
+  - path: /tmp/setup-zsh.sh
+    permissions: '0755'
+    content: |
+      #!/bin/bash
+      RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      sed -i 's/^ZSH_THEME=.*/ZSH_THEME="agnoster"/' ~/.zshrc
+      sed -i 's/^plugins=(.*)/plugins=(git)/' ~/.zshrc
 runcmd:
   - chmod -x /etc/update-motd.d/*
   - sed -i 's/^#\?PrintMotd.*/PrintMotd yes/' /etc/ssh/sshd_config
@@ -173,6 +184,8 @@ runcmd:
   - systemctl restart sshd
   - usermod -aG docker labuser
   - chown -R labuser:labuser /home/labuser
+  - sudo -Hu labuser bash /tmp/setup-zsh.sh
+  - chsh -s /usr/bin/zsh labuser
   - echo "=== docker-lab VM is ready! ==="
 USERDATA
 
